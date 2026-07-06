@@ -173,33 +173,6 @@ Reporting / Analytics
 
 ---
 
-# 📂 Project Structure
-
-```
-SQL-Data-Warehouse
-│
-├── datasets
-│
-├── bronze
-│   ├── Tables
-│   └── Stored Procedures
-│
-├── silver
-│   ├── Tables
-│   └── Stored Procedures
-│
-├── gold
-│   ├── Views
-│   └── Business Models
-│
-├── architecture
-│   ├── data_architecture.png
-│   └── ETL.png
-│
-└── README.md
-```
-
----
 
 # 🎯 Learning Outcomes
 
@@ -218,17 +191,6 @@ By completing this project, I learned:
 
 ---
 
-# 🚀 Future Improvements
-
-- Incremental ETL
-- Change Data Capture (CDC)
-- SQL Agent Automation
-- Power BI Dashboard
-- Data Quality Validation
-- Logging Framework
-- Error Handling
-
----
 
 # 📚 Reference
 
@@ -236,30 +198,3 @@ This project was built for learning purposes by following the excellent Data Eng
 
 YouTube Tutorial:
 https://youtu.be/9GVqKuTVANE
-
----
-
-# ⭐ If you like this project
-
-Please give this repository a ⭐ on GitHub.
-
-It motivates me to build more Data Engineering and Data Analytics projects.
-
----
-
-## 👨‍💻 Author
-
-**Mohd Danish**
-
-Aspiring Data Engineer | Data Analyst
-
-- SQL
-- Python
-- Power BI
-- ETL
-- Data Warehouse
-- Machine Learning
-
-GitHub: https://github.com/your-github
-
-LinkedIn: https://linkedin.com/in/your-linkedin

@@ -1,6 +1,6 @@
 Here is the updated `README.md` file, incorporating the data architecture and ETL methodology diagrams. I have formatted the image paths to point directly to the `docs/` folder as you requested. 
 
-***
+*** 
 
 ```markdown
 # SQL Data Warehouse Architecture and ETL Engineering Project

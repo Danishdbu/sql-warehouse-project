@@ -1,47 +1,265 @@
-# SQL Data Warehouse Architecture and ETL Engineering Project
+# 🚀 SQL Data Warehouse Project | Medallion Architecture
 
-**Overview:** 
-This project focuses on developing a modern data warehouse using SQL Server to consolidate sales data, enabling analytical reporting and informed decision-making. It implements a comprehensive ETL (Extract, Transform, Load) pipeline that transforms messy, raw data into a structured **Star Schema** data model explicitly designed for business intelligence. 
+A complete end-to-end **SQL Data Warehouse** project built using **SQL Server** following the **Medallion Architecture (Bronze, Silver, Gold)**.
 
-### **High-Level Data Architecture**
+This project demonstrates how to design a scalable data warehouse, build ETL pipelines using SQL Stored Procedures, clean and transform raw data, create dimensional models, and prepare business-ready datasets for reporting and analytics.
 
-![High Level Data Architecture](docs/data_architecture.png)
+---
 
-The data warehouse strictly follows the **Medallion architecture**, breaking down the system into three distinct layers to ensure a separation of concerns. As shown in the architecture diagram, the data flows from raw CSV files into the warehouse and eventually out to consumers for BI, machine learning, and ad-hoc queries:
+# 📌 Project Overview
 
-*   **Bronze Layer:** This landing zone stores raw, unmanipulated data exactly as it arrives from the CRM and ERP source systems. Keeping the data untouched ensures full traceability and assists data engineers in root-cause analysis. Data is ingested via a full load process (TRUNCATE and INSERT) using `BULK INSERT` for maximum speed. 
-*   **Silver Layer:** This is where the heavy lifting of data cleansing occurs, providing clean and standardized data in table format. Transformations in this layer include trimming unwanted spaces, normalizing coded abbreviations to friendly values, handling missing data (replacing NULLs with defaults like "Not Available"), and deriving new columns.
-*   **Gold Layer:** The final layer provides business-ready data structured specifically for analytics and reporting. It is built virtually using SQL **Views** to remain dynamic and fast, meaning there is no physical load process. This layer utilizes a **Star Schema** consisting of Dimension tables (Customers, Products) and a Fact table (Sales) linked together using unique, system-generated surrogate keys.
+The project simulates a real-world Data Engineering workflow where data from multiple source systems is extracted, transformed, and loaded into a centralized SQL Server Data Warehouse.
 
-### **ETL Methodology**
+The implementation follows the **Bronze → Silver → Gold** architecture.
+
+- Raw Data Ingestion
+- Data Cleaning
+- Data Standardization
+- Data Transformation
+- Star Schema Modeling
+- Business Ready Views
+- Reporting Layer
+
+---
+
+# 🏗️ High Level Architecture
+
+![High Level Architecture](docs/data_architecture.png)
+
+---
+
+# 🔄 ETL Workflow
 
 ![ETL Methods](docs/ETL.png)
 
-The project utilizes robust ETL techniques to process and load the data:
-*   **Extraction:** Data is pulled via full extraction by parsing CSV files sourced from the CRM and ERP systems. 
-*   **Transformation:** The pipeline applies a variety of transformation rules, including data cleansing (handling invalid or missing values, casting data types, detecting outliers), data normalization, and implementing business logic.
-*   **Load:** The warehouse is updated using Batch Processing with a Full Load method (Truncate & Insert) to refresh the Bronze and Silver layers.
+---
 
-### **Data Sources**
-The project integrates and merges data from two distinct source systems, both provided as CSV files:
-*   **CRM (Customer Relationship Management):** Provides core tables for customer info, product info, and transactional sales details.
-*   **ERP (Enterprise Resource Planning):** Provides supplementary details including customer locations, birth dates, and product categories.
+# 🏢 Source Systems
 
-### **Tech Stack & Tools**
-*   **SQL Server Express & SSMS:** Used as the primary database engine and client to run queries and host the warehouse.
-*   **Git & GitHub:** For version control and storing the project repository.
-*   **Draw.io:** Utilized to design the Data Architecture, Data Flow/Lineage, and Logical Data Model diagrams.
-*   **Notion:** Used to organize project epics, task tracking, and the overall project plan.
+The project loads data from multiple source systems:
 
-### **Repository Structure**
-The project directory is structured logically to separate data, code, and documentation:
-*   `/data_sets/`: Contains the original raw CSV files from the ERP and CRM sources.
-*   `/scripts/`: Contains the core SQL files, organized internally into `/bronze/`, `/silver/`, and `/gold/` folders. This includes the DDL (Data Definition Language) to create schemas/tables and the Stored Procedures that handle the ETL processes.
-*   `/tests/`: Contains SQL quality check scripts built to validate data uniqueness, correct data types, and integration logic across the layers.
-*   `/docs/`: Contains visual documentation including the `data_architecture.png` and `ETL.png` diagrams.
+- CRM
+- ERP
+- CSV Files
 
-### **Key Design Principles**
-*   **Naming Conventions:** The project strictly follows the **snake_case** convention across all files. Bronze and Silver tables use a `SourceSystem_EntityName` pattern (e.g., `crm_cust_info`), while the Gold layer uses business-aligned prefixes (e.g., `dim_customers`, `fact_sales`).
-*   **Error Handling & ETL Auditing:** Stored procedures managing the pipelines are wrapped in `TRY/CATCH` blocks for robust error handling. They also utilize `GETDATE()` and `DATEDIFF()` variables to calculate and print the load duration of each table and the complete batch, helping to identify performance bottlenecks.
-*   **Metadata Tracking:** Technical metadata columns (like `dw_create_date`) are appended during the Silver layer load to track exactly when records were processed.
-*   **License:** This project is licensed under the **MIT License**, granting full freedom to use, modify, and share the code.
+Source files are placed inside folders and loaded into SQL Server.
+
+---
+
+# 🥉 Bronze Layer
+
+Purpose:
+
+Store raw source data without applying any transformations.
+
+### Features
+
+- Raw Tables
+- Full Load
+- Batch Processing
+- Truncate & Insert
+- Stored Procedures
+- No Data Transformation
+
+This layer preserves the original source data exactly as received.
+
+---
+
+# 🥈 Silver Layer
+
+Purpose:
+
+Transform raw data into clean and standardized datasets.
+
+### Transformations
+
+- Remove Duplicates
+- Handle NULL Values
+- Data Cleaning
+- Data Standardization
+- Data Normalization
+- Derived Columns
+- Data Enrichment
+- Data Type Conversion
+
+Stored Procedures are used to perform all transformations.
+
+---
+
+# 🥇 Gold Layer
+
+Purpose:
+
+Create business-ready datasets for analytics and reporting.
+
+### Includes
+
+- Star Schema
+- Fact Tables
+- Dimension Tables
+- Business Views
+- Aggregated Data
+- Business Logic
+
+This layer is optimized for BI tools and SQL analytics.
+
+---
+
+# ⚙️ ETL Process
+
+The ETL pipeline consists of three stages:
+
+## 1. Extract
+
+- Full Extraction
+- Incremental Extraction
+- CSV Import
+- Database Queries
+
+## 2. Transform
+
+- Data Cleaning
+- Standardization
+- Data Integration
+- Aggregations
+- Business Rules
+- Derived Columns
+
+## 3. Load
+
+- Full Load
+- Incremental Load
+- Upsert
+- Merge
+- Truncate & Insert
+
+---
+
+# 📊 Data Warehouse Layers
+
+```
+Source Systems
+      │
+      ▼
+ Bronze Layer
+(Raw Data Storage)
+      │
+      ▼
+ Silver Layer
+(Clean & Standardized Data)
+      │
+      ▼
+ Gold Layer
+(Business Ready Data)
+      │
+      ▼
+Reporting / Analytics
+```
+
+---
+
+# 🛠️ Technologies Used
+
+- SQL Server
+- T-SQL
+- Stored Procedures
+- SQL Views
+- ETL
+- Data Warehouse
+- Medallion Architecture
+- Star Schema
+- Git
+- GitHub
+
+---
+
+# 📂 Project Structure
+
+```
+SQL-Data-Warehouse
+│
+├── datasets
+│
+├── bronze
+│   ├── Tables
+│   └── Stored Procedures
+│
+├── silver
+│   ├── Tables
+│   └── Stored Procedures
+│
+├── gold
+│   ├── Views
+│   └── Business Models
+│
+├── architecture
+│   ├── data_architecture.png
+│   └── ETL.png
+│
+└── README.md
+```
+
+---
+
+# 🎯 Learning Outcomes
+
+By completing this project, I learned:
+
+- SQL Data Warehouse Design
+- ETL Pipeline Development
+- SQL Stored Procedures
+- Data Cleaning
+- Data Standardization
+- Data Modeling
+- Star Schema
+- Business Views
+- Data Integration
+- SQL Best Practices
+
+---
+
+# 🚀 Future Improvements
+
+- Incremental ETL
+- Change Data Capture (CDC)
+- SQL Agent Automation
+- Power BI Dashboard
+- Data Quality Validation
+- Logging Framework
+- Error Handling
+
+---
+
+# 📚 Reference
+
+This project was built for learning purposes by following the excellent Data Engineering tutorial from **Data With Baraa**.
+
+YouTube Tutorial:
+https://youtu.be/9GVqKuTVANE
+
+---
+
+# ⭐ If you like this project
+
+Please give this repository a ⭐ on GitHub.
+
+It motivates me to build more Data Engineering and Data Analytics projects.
+
+---
+
+## 👨‍💻 Author
+
+**Mohd Danish**
+
+Aspiring Data Engineer | Data Analyst
+
+- SQL
+- Python
+- Power BI
+- ETL
+- Data Warehouse
+- Machine Learning
+
+GitHub: https://github.com/your-github
+
+LinkedIn: https://linkedin.com/in/your-linkedin

@@ -1,8 +1,3 @@
-Here is the updated `README.md` file, incorporating the data architecture and ETL methodology diagrams. I have formatted the image paths to point directly to the `docs/` folder as you requested. 
-
-*** 
-
-```markdown
 # SQL Data Warehouse Architecture and ETL Engineering Project
 
 **Overview:** 
@@ -50,4 +45,3 @@ The project directory is structured logically to separate data, code, and docume
 *   **Error Handling & ETL Auditing:** Stored procedures managing the pipelines are wrapped in `TRY/CATCH` blocks for robust error handling. They also utilize `GETDATE()` and `DATEDIFF()` variables to calculate and print the load duration of each table and the complete batch, helping to identify performance bottlenecks.
 *   **Metadata Tracking:** Technical metadata columns (like `dw_create_date`) are appended during the Silver layer load to track exactly when records were processed.
 *   **License:** This project is licensed under the **MIT License**, granting full freedom to use, modify, and share the code.
-```
